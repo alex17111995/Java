@@ -41,6 +41,7 @@ public class mainForm extends Application {
         loader.setController(controller);
         Parent frame = loader.load();
         UpdateGui.setUpdateGui(controller);
+        UpdateGui.setGame(game);
         try{
             setImage(controller.getPlayer1());
             setImage(controller.getPlayer2());
@@ -69,6 +70,7 @@ public class mainForm extends Application {
         UpdateGui.update();
         this.myLettersAction();
         this.lettersAction();
+        UpdateGui.update();
 
 
         controller.getSubmitWord().setOnAction(e->{
