@@ -7,8 +7,9 @@ public class UpdateGui {
     private static GuiController controller;
     private static int currentPlayer;
     public static void update(){
-        //controller.getTimer().setText("30");
-       //controller.getCurrentPlayer().setText(Integer.toString(currentPlayer));
+        controller.getTimer().setText("30");
+       controller.getCurrentPlayer().setText(Integer.toString(currentPlayer));
+
     }
     public static void setUpdateGui(GuiController control){
         controller=control;
