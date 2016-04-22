@@ -31,7 +31,11 @@ public class Player implements Runnable{
         return tiles;
     }
 
+    synchronized public void setGameOver() {
+        this.gameOver = true;
+    }
 
+    boolean gameOver=false;
     public void setTiles(List<Character> tiles) {
         this.tiles = tiles;
     }
@@ -55,6 +59,10 @@ public class Player implements Runnable{
         tiles=gamePlayer.getTiles(7); //initHand
         while(true){
             try {
+                synchronized (this){
+                    if(gameOver)
+                        break;
+                }
                 String wordSubmitted= getWord(); //apel blocant
                 //TODO update GUI using something like controller.update()..
 
@@ -73,7 +81,7 @@ public class Player implements Runnable{
             synchronized (this) {
                 List<Character> newTiles= gamePlayer.getTiles(wordSubmitted.length());
                 if(newTiles.size()==0){
-                    //TODO no more tiles game is finished{
+                    gamePlayer.setGameOver(this);
                 }
                 char[] formingCharcters= wordSubmitted.toCharArray();
                 for (char formingCharcter : formingCharcters) {
