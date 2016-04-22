@@ -1,6 +1,8 @@
 package graphicInterface;
 
 import com.sun.javaws.exceptions.InvalidArgumentException;
+import game.Game;
+import game.Player;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
@@ -28,8 +30,6 @@ public class MainForm extends Application {
     private GuiController controller = new GuiController();
     private List<Button> myLetters=new ArrayList<>();
     private List<Button> letters=new ArrayList<>();
-    private int currentPlayer=0;
-    private int playerLimit=2;
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(
@@ -60,6 +60,11 @@ public class MainForm extends Application {
         // TODO: 4/22/2016
 
 
+        Game game = new Game();
+        for(int i=0;i<5;i++){//NUMBER of players
+            game.generatePlayer(); //genereaza si incepe threadul
+        }
+
         //setButtonAction
         this.myLettersAction();
         this.lettersAction();
@@ -73,12 +78,9 @@ public class MainForm extends Application {
             }
             System.out.println(word);
             if(!word.isEmpty()) {
-                if (this.currentPlayer == this.playerLimit) {
-                    this.currentPlayer = 0;
-                }
-                this.currentPlayer++;
-                this.changePlayerLetters();
-                UpdateGui.setCurrentPlayer(this.currentPlayer);
+                Player player = game.getPlayer();
+                player.postWord(word);
+                //UpdateGui.setCurrentPlayer();<- playerul se schimba cand e un string corect, se face in Player
             }
         });
 
@@ -121,7 +123,6 @@ public class MainForm extends Application {
         return false;
     }
     protected void changePlayerLetters(){
-        System.out.println(this.currentPlayer);
     }
     protected void addButtons(){
         this.myLetters.add(controller.getMyLetter1());
