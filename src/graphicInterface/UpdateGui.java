@@ -26,6 +26,15 @@ public class UpdateGui {
     }
 
     private static Game game;
+    public static void updateTime(long  number){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                controller.getTimer().setText(""+number);
+            }});
+
+
+    }
     public static void update(){
         Platform.runLater(new Runnable() {
             @Override
@@ -46,6 +55,7 @@ public class UpdateGui {
                 for(int i=tiles.size();i<7;i++){
                     buttons[i].setText("");
                 }
+                controller.getCurrentPlayer().setText("Player "+player.getPlayerNumber());
                 return;
             }
         });

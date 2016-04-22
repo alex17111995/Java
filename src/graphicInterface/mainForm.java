@@ -3,6 +3,7 @@ package graphicInterface;
 import com.sun.javaws.exceptions.InvalidArgumentException;
 import game.Game;
 import game.Player;
+import game.Timekeeper;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
@@ -67,6 +68,9 @@ public class mainForm extends Application {
             this.game.generatePlayer(); //genereaza si incepe threadul
         }
         UpdateGui.setCurrentPlayer(game.getCurrentPlayer());
+       Thread timer= new Thread(new Timekeeper());
+        timer.setDaemon(true);
+        timer.start();
 
         this.myLettersAction();
         this.lettersAction();

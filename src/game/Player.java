@@ -12,6 +12,11 @@ import java.util.List;
  */
 public class Player implements Runnable{
     int numberOfPoints=0;
+
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
+
     int playerNumber;
     Game gamePlayer;
     Player(int playerNumber,Game game){
