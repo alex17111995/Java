@@ -3,11 +3,8 @@ package graphicInterface;
 import game.Game;
 import game.Player;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
 
-import java.awt.*;
-import  javafx.scene.control.Button;
 import java.util.List;
 
 /**
@@ -30,7 +27,7 @@ public class UpdateGui {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                controller.getTimer().setText(""+number);
+                controller.getTimer().setText(""+Long.toString(number));
             }});
 
 

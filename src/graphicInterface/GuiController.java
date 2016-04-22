@@ -3,6 +3,7 @@ package graphicInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 
@@ -12,7 +13,7 @@ import javafx.scene.image.ImageView;
 public class GuiController {
     @FXML private ImageView player1;
     @FXML private ImageView player2;
-    @FXML private TableView scoreTable;
+    @FXML private TableView<TableRow> scoreTable;
     @FXML private Button letter1;
     @FXML private Button letter2;
     @FXML private Button letter3;
@@ -31,6 +32,42 @@ public class GuiController {
     @FXML private Label player;
     @FXML private Label currentPlayer;
     @FXML private Label timer;
+    @FXML private TableColumn<TableRow,String> playerColumn;
+    @FXML private TableColumn<TableRow,String> wordColumn;
+    @FXML private TableColumn<TableRow,String> scoreColumn;
+    @FXML private TableColumn<TableRow,String> totalColumn;
+
+    public TableColumn<TableRow, String> getWordColumn() {
+        return wordColumn;
+    }
+
+    public void setWordColumn(TableColumn<TableRow, String> wordColumn) {
+        this.wordColumn = wordColumn;
+    }
+
+    public TableColumn<TableRow, String> getScoreColumn() {
+        return scoreColumn;
+    }
+
+    public void setScoreColumn(TableColumn<TableRow, String> scoreColumn) {
+        this.scoreColumn = scoreColumn;
+    }
+
+    public TableColumn<TableRow, String> getTotalColumn() {
+        return totalColumn;
+    }
+
+    public void setTotalColumn(TableColumn<TableRow, String> totalColumn) {
+        this.totalColumn = totalColumn;
+    }
+
+    public TableColumn<TableRow, String> getPlayerColumn() {
+        return playerColumn;
+    }
+
+    public void setPlayerColumn(TableColumn<TableRow, String> playerColumn) {
+        this.playerColumn = playerColumn;
+    }
 
     public ImageView getPlayer2() {
         return player2;
@@ -48,11 +85,11 @@ public class GuiController {
         this.player1 = player1;
     }
 
-    public TableView getScoreTable() {
+    public TableView<TableRow> getScoreTable() {
         return scoreTable;
     }
 
-    public void setScoreTable(TableView scoreTable) {
+    public void setScoreTable(TableView<TableRow> scoreTable) {
         this.scoreTable = scoreTable;
     }
 

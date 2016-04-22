@@ -3,15 +3,15 @@ package graphicInterface;
 import com.sun.javaws.exceptions.InvalidArgumentException;
 import game.Game;
 import game.Player;
-import game.Timekeeper;
 import javafx.application.Application;
-import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -33,6 +33,7 @@ public class mainForm extends Application {
     private GuiController controller = new GuiController();
     private List<Button> myLetters=new ArrayList<>();
     private List<Button> letters=new ArrayList<>();
+    private final ObservableList<TableRow> data= FXCollections.observableArrayList();
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(
@@ -51,26 +52,17 @@ public class mainForm extends Application {
             System.out.println("image not found");
         }
 
-        //building table score
-        this.buildTableScore(controller.getScoreTable());
+
+        this.initializeTableScore();
+
 
         //adding gui buttons to list
         this.addButtons();
-
-        //adding players
-        // TODO: 4/22/2016  
-
-        //initializing buttons before each turn
-        // TODO: 4/22/2016
-
 
         for(int i=0;i<5;i++){//NUMBER of players
             this.game.generatePlayer(); //genereaza si incepe threadul
         }
         UpdateGui.setCurrentPlayer(game.getCurrentPlayer());
-       Thread timer= new Thread(new Timekeeper());
-        timer.setDaemon(true);
-        timer.start();
 
         this.myLettersAction();
         this.lettersAction();
@@ -89,7 +81,7 @@ public class mainForm extends Application {
                 player.postWord(word);
                 this.changePlayerLetters(player);
                 //UpdateGui.setCurrentPlayer(player.playerNumber);
-
+                this.buildTableScore(player,word);
                 System.out.println(word);
             }
         });
@@ -175,14 +167,19 @@ public class mainForm extends Application {
             System.out.println("not a image");
         }
     }
-    protected void buildTableScore(TableView tableView){
+    protected void buildTableScore(Player player,String word){
 
+        TableRow entry =new TableRow("player "+Integer.toString(player.getPlayerNumber()),word,Integer.toString(word.length()),Integer.toString(player.getPlayerPoints()));
 
-
-
-        //// TODO: 4/22/2016 ma fut mai tarziu cu tabelu asta;
+        data.add(entry);
     }
-
+    protected void initializeTableScore(){
+        controller.getPlayerColumn().setCellValueFactory(new PropertyValueFactory<TableRow,String>("Player"));
+        controller.getWordColumn().setCellValueFactory(new PropertyValueFactory<TableRow,String>("Word"));
+        controller.getScoreColumn().setCellValueFactory(new PropertyValueFactory<TableRow,String>("Points"));
+        controller.getTotalColumn().setCellValueFactory(new PropertyValueFactory<TableRow,String>("Total"));
+        controller.getScoreTable().setItems(data);
+    }
     public static void main(String[] args) {
         launch(args);
     }

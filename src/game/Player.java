@@ -4,7 +4,6 @@ import graphicInterface.UpdateGui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -16,6 +15,10 @@ public class Player implements Runnable{
     public int getPlayerNumber() {
         return playerNumber;
     }
+    public int getPlayerPoints() {
+        return numberOfPoints;
+    }
+
 
     int playerNumber;
     Game gamePlayer;
@@ -123,4 +126,5 @@ public class Player implements Runnable{
     public void notifyTurnSwitch() {
         //nu fa nimic
     }
+
 }
