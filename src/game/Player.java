@@ -3,6 +3,8 @@ package game;
 import graphicInterface.UpdateGui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -42,12 +44,25 @@ public class Player implements Runnable{
 
     @Override
     public void run() {
+        tiles=gamePlayer.getTiles(7); //initHand
         while(true){
             try {
                 String wordSubmitted= getWord(); //apel blocant
                 //TODO update GUI using something like controller.update()..
-                if(gamePlayer.postWord(wordSubmitted)==true){
+
+                if(gamePlayer.postWord(wordSubmitted)==true && checkHaveRequiringTiles(wordSubmitted)==true){
                     synchronized (this) {
+                        List<Character> newTiles= gamePlayer.getTiles(wordSubmitted.length());
+                        if(newTiles.size()==0){
+                            //TODO no more tiles game is finished{
+                        }
+                        char[] formingCharcters= wordSubmitted.toCharArray();
+                        for (char formingCharcter : formingCharcters) {
+                            this.tiles.remove(new Character(formingCharcter));
+                        }
+                        for (Character newTile : newTiles) {
+                            this.tiles.add(newTile);
+                        }
                         numberOfPoints += gamePlayer.computeWordValue(wordSubmitted);
                     }
                     gamePlayer.switchPlayer();//turn ended, switchPlayer
@@ -59,6 +74,30 @@ public class Player implements Runnable{
             }
         }
 
+    }
+    private boolean checkHaveRequiringTiles(String word){
+
+        char[] formingCharacters=word.toCharArray();
+        Arrays.sort(formingCharacters);
+        Character lastChar=null;
+        int lastIndex=0;
+        for (char formingCharacter : formingCharacters) {
+            if(lastChar!=null&& formingCharacter==lastChar){
+                if(lastIndex!=this.tiles.size()-1)return false;
+               int index = this.tiles.subList(lastIndex+1,this.tiles.size()).indexOf(formingCharacter);
+                if(index==-1)
+                    return false;
+                lastIndex=index;
+            }
+            else{
+                int index = this.tiles.indexOf(formingCharacter);
+                if(index==-1)
+                    return false;
+                lastIndex=index;
+                lastChar=formingCharacter;
+            }
+        }
+        return true;
     }
 
     public List<Character> getTiles(int numberOfTilesToGet){

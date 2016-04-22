@@ -20,6 +20,7 @@ public class Game {
        List<String> testare = new ArrayList<>();
        testare.add("Ciubi");
        testare.add("Ciuc");
+       bag=new Bag();
        wordsAccepted= new AcceptedWords(new Trie(),testare);
     }
     public void generatePlayer(){
@@ -39,6 +40,9 @@ public  synchronized Player getPlayer(){
     }
     public int computeWordValue(String word){
         return word.length();
+    }
+    public List<Character> getTiles(int numberOfTiles){
+        return bag.getTiles(numberOfTiles);
     }
 
 }
