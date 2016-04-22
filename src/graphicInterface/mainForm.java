@@ -67,7 +67,7 @@ public class mainForm extends Application {
             this.game.generatePlayer(); //genereaza si incepe threadul
         }
         UpdateGui.setCurrentPlayer(game.getCurrentPlayer());
-        UpdateGui.update();
+
         this.myLettersAction();
         this.lettersAction();
         UpdateGui.update();
@@ -79,13 +79,14 @@ public class mainForm extends Application {
                 word+=letter.getText();
                 letter.setText("");
             }
-            System.out.println(word);
+
             if(!word.isEmpty()) {
                 Player player = game.getPlayer();
                 player.postWord(word);
-                this.changePlayerLetters();
-                UpdateGui.setCurrentPlayer(game.getCurrentPlayer());
-                UpdateGui.update();
+                this.changePlayerLetters(player);
+                //UpdateGui.setCurrentPlayer(player.playerNumber);
+
+                System.out.println(word);
             }
         });
 
@@ -127,9 +128,9 @@ public class mainForm extends Application {
         }
         return false;
     }
-    protected void changePlayerLetters(){
-        for(int current=0;current<this.game.getPlayer().getTiles().size();current++){
-            this.myLetters.get(current).setText(this.game.getPlayer().getTiles().get(current).toString());
+    protected void changePlayerLetters(Player player){
+        for(int current=0;current<this.myLetters.size();current++){
+            this.myLetters.get(current).setText(player.getTiles().get(current).toString());
         }
     }
     protected void addButtons(){
