@@ -1,3 +1,5 @@
+package game;
+
 import java.util.List;
 
 /**
@@ -5,7 +7,7 @@ import java.util.List;
  */
 public class AcceptedWords {
     private Trie trie;
-    AcceptedWords(Trie trie,List<String> words ){
+    AcceptedWords(Trie trie, List<String> words ){
         //TODO TRIE
         this.trie=trie;
         for (String word : words) {

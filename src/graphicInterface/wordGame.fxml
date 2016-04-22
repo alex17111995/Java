@@ -15,7 +15,7 @@
         <Label layoutX="64.0" layoutY="14.0" prefWidth="88.0" text="Current player:" />
         <Label layoutX="64.0" layoutY="38.0" prefWidth="51.0" text="Wins" />
         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="222.0" layoutY="38.0" prefWidth="28.0" text="0" />
-        <Label layoutX="196.0" layoutY="11.0" prefWidth="47.0" text="player" />
+        <Label fx:id="currentPlayer" layoutX="196.0" layoutY="11.0" prefWidth="47.0" text="player" />
       </children>
     </Pane>
     <Separator layoutX="285.0" layoutY="0.0" minWidth="0.0" orientation="VERTICAL" prefHeight="484.0" prefWidth="4.0001220703125" />
@@ -32,33 +32,33 @@
     </TableView>
     <HBox layoutX="295.0" layoutY="391.0" prefHeight="59.0" prefWidth="381.0">
       <children>
-        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="Letter" />
-        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="Letter" />
-        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="Letter" />
-        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="Letter" />
-        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="Letter" />
-        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="Letter" />
-        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="Letter" />
+        <Button fx:id="myLetter1" mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="a" />
+        <Button fx:id="myLetter2" mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="b" />
+        <Button fx:id="myLetter3" mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="v" />
+        <Button fx:id="myLetter4" mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="d" />
+        <Button fx:id="myLetter5" mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="s" />
+        <Button fx:id="myLetter6" mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="r" />
+        <Button fx:id="myLetter7" mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="e" />
       </children>
     </HBox>
     <Label layoutX="295.0" layoutY="375.0" prefWidth="98.0" text="My Letters" />
     <HBox layoutX="293.0" layoutY="117.0" prefHeight="59.0" prefWidth="381.0">
       <children>
-        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="" />
-        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="" />
-        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="" />
-        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="" />
-        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="" />
-        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="" />
-        <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="" />
+        <Button fx:id="letter1" mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="" />
+        <Button fx:id="letter2" mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="" />
+        <Button fx:id="letter3" mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="" />
+        <Button fx:id="letter4" mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="" />
+        <Button fx:id="letter5" mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="" />
+        <Button fx:id="letter6" mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="" />
+        <Button fx:id="letter7" mnemonicParsing="false" prefHeight="59.0" prefWidth="57.000099999997474" text="" />
       </children>
     </HBox>
-    <Label alignment="CENTER" layoutX="500.0" layoutY="30.0" prefWidth="65.0" text="tt" />
+    <Label fx:id="timer" alignment="CENTER" layoutX="500.0" layoutY="30.0" prefWidth="65.0" text="tt" />
     <Label alignment="CENTER" layoutX="406.0" layoutY="30.0" prefWidth="69.0" text="Time" textAlignment="CENTER" />
-    <Button layoutX="320.0" layoutY="211.0" mnemonicParsing="false" text="Submit word" />
+    <Button fx:id="submitWord" layoutX="320.0" layoutY="211.0" mnemonicParsing="false" text="Submit word" />
     <Button layoutX="320.0" layoutY="242.0" mnemonicParsing="false" prefWidth="88.00009999999747" text="auto-fill" />
     <Label alignment="CENTER" layoutX="391.0" layoutY="313.0" prefWidth="160.0" text="Points received" />
-    <Label alignment="CENTER" layoutX="500.0" layoutY="63.0" prefWidth="65.0" text="" />
+    <Label fx:id="player" alignment="CENTER" layoutX="500.0" layoutY="63.0" prefWidth="65.0" text="" />
     <Label alignment="CENTER" layoutX="406.0" layoutY="63.0" prefWidth="69.0" text="Turn" textAlignment="CENTER" />
   </children>
 </AnchorPane>

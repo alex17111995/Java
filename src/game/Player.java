@@ -1,6 +1,7 @@
-import javafx.application.Platform;
+package game;
 
-import javax.print.DocFlavor;
+import graphicInterface.UpdateGui;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class Player implements Runnable{
             try {
                 String wordSubmitted= getWord(); //apel blocant
                 //TODO update GUI using something like controller.update()..
+                UpdateGui.update();
             } catch (InterruptedException e) {
                 break;//s-a terminaj jocul
             }
