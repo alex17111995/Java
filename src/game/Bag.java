@@ -14,6 +14,7 @@ public class Bag {
     Random random = new Random();
     public Bag(){
         for(char letter='A';letter<='Z';letter++){
+            for(int i=0;i<5;i++)
             availableTiles.add(letter);
         }
     }

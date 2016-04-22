@@ -21,6 +21,7 @@ public class Player implements Runnable{
         return tiles;
     }
 
+
     public void setTiles(List<Character> tiles) {
         this.tiles = tiles;
     }
@@ -56,4 +57,7 @@ public class Player implements Runnable{
     }
 
 
+    public void notifyTurnSwitch() {
+        //nu fa nimic
+    }
 }
