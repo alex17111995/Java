@@ -8,11 +8,12 @@ public class Game {
     int currentPlayer=0;
     AcceptedWords wordsAccepted;
     Bag bag;
-    Player generatePlayer(){
-        return  null;
-    }
-    void wakeNextPlayer(){
 
+    void generatePlayer(){
+        playersOfGame.add(new Player(playersOfGame.size(),this));
+    }
+    Player switchPlayer(){
+        return playersOfGame.get(currentPlayer=(currentPlayer+1)%playersOfGame.size());
     }
 
 }
