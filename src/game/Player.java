@@ -61,8 +61,8 @@ public class Player implements Runnable{
 
     }
 
-    List<Character> getTiles(int numberOfTilesToGet){
-        return null;
+    public List<Character> getTiles(int numberOfTilesToGet){
+        return this.tiles;
     }
 
 

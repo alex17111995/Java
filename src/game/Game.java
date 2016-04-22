@@ -33,7 +33,7 @@ public class Game {
         nextPlayer.notifyTurnSwitch();
         return nextPlayer;
     }
-public    synchronized Player getPlayer(){
+public  synchronized Player getPlayer(){
         return playersOfGame.get(currentPlayer);
 
     }
