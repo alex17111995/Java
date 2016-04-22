@@ -45,4 +45,7 @@ public  synchronized Player getPlayer(){
         return bag.getTiles(numberOfTiles);
     }
 
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
 }

@@ -26,7 +26,8 @@ import java.util.List;
 /**
  * Created by dryflo on 4/22/2016.
  */
-public class MainForm extends Application {
+public class mainForm extends Application {
+    private Game game = new Game();
     private GuiController controller = new GuiController();
     private List<Button> myLetters=new ArrayList<>();
     private List<Button> letters=new ArrayList<>();
@@ -60,12 +61,12 @@ public class MainForm extends Application {
         // TODO: 4/22/2016
 
 
-        Game game = new Game();
-        for(int i=0;i<5;i++){//NUMBER of players
-            game.generatePlayer(); //genereaza si incepe threadul
-        }
 
-        //setButtonAction
+        for(int i=0;i<5;i++){//NUMBER of players
+            this.game.generatePlayer(); //genereaza si incepe threadul
+        }
+        UpdateGui.setCurrentPlayer(game.getCurrentPlayer());
+        UpdateGui.update();
         this.myLettersAction();
         this.lettersAction();
 
@@ -80,7 +81,9 @@ public class MainForm extends Application {
             if(!word.isEmpty()) {
                 Player player = game.getPlayer();
                 player.postWord(word);
-                //UpdateGui.setCurrentPlayer();<- playerul se schimba cand e un string corect, se face in Player
+                this.changePlayerLetters();
+                UpdateGui.setCurrentPlayer(game.getCurrentPlayer());
+                UpdateGui.update();
             }
         });
 
@@ -123,6 +126,9 @@ public class MainForm extends Application {
         return false;
     }
     protected void changePlayerLetters(){
+        for(int current=0;current<this.game.getPlayer().getTiles().size();current++){
+            this.myLetters.get(current).setText(this.game.getPlayer().getTiles().get(current).toString());
+        }
     }
     protected void addButtons(){
         this.myLetters.add(controller.getMyLetter1());
