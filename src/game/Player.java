@@ -26,7 +26,7 @@ public class Player implements Runnable{
         this.tiles = tiles;
     }
     private String postedWord="";
-    synchronized void postWord(String word){
+   public synchronized void postWord(String word){
         postedWord=word;
         this.notify();
     }

@@ -1,33 +1,43 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Alex on 4/22/2016.
  */
 public class Game {
-    private List<Player> playersOfGame;
+    private List<Player> playersOfGame = new ArrayList<>();
     private int currentPlayer=0;
+
     private AcceptedWords wordsAccepted;
     private Bag bag;
 
-    boolean postWord(String word){
+   public boolean postWord(String word){
         return wordsAccepted.isAcceptedWord(word);
     }
-    void generatePlayer(){
-        playersOfGame.add(new Player(playersOfGame.size(),this));
+   public Game(){
+       List<String> testare = new ArrayList<>();
+       testare.add("Ciubi");
+       testare.add("Ciuc");
+       wordsAccepted= new AcceptedWords(new Trie(),testare);
     }
-    synchronized Player switchPlayer(){
+    public void generatePlayer(){
+        Player player= new Player(playersOfGame.size(),this);
+        playersOfGame.add(player);
+        new Thread(player).start();
+    }
+   public synchronized Player switchPlayer(){
 
         Player nextPlayer= playersOfGame.get(currentPlayer=(currentPlayer+1)%playersOfGame.size());
         nextPlayer.notifyTurnSwitch();
         return nextPlayer;
     }
-   synchronized Player getPlayer(){
+public    synchronized Player getPlayer(){
         return playersOfGame.get(currentPlayer);
 
     }
-    int computeWordValue(String word){
+    public int computeWordValue(String word){
         return word.length();
     }
 
