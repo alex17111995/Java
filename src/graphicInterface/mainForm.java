@@ -3,6 +3,7 @@ package graphicInterface;
 import com.sun.javaws.exceptions.InvalidArgumentException;
 import game.Game;
 import game.Player;
+import game.Timekeeper;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,6 +46,7 @@ public class mainForm extends Application {
         Parent frame = loader.load();
         UpdateGui.setUpdateGui(controller);
         UpdateGui.setGame(game);
+        UpdateGui.setTable(data);
         try{
             setImage(controller.getPlayer1());
             setImage(controller.getPlayer2());
@@ -58,7 +60,9 @@ public class mainForm extends Application {
 
         //adding gui buttons to list
         this.addButtons();
-
+        Thread timerkeeper= new Thread(new Timekeeper());
+        timerkeeper.setDaemon(true);
+        timerkeeper.start();
         for(int i=0;i<5;i++){//NUMBER of players
             this.game.generatePlayer(); //genereaza si incepe threadul
         }
@@ -66,7 +70,7 @@ public class mainForm extends Application {
 
         this.myLettersAction();
         this.lettersAction();
-        UpdateGui.update();
+        UpdateGui.update(game.getPlayer(),false,"");
 
 
         controller.getSubmitWord().setOnAction(e->{
@@ -81,7 +85,6 @@ public class mainForm extends Application {
                 player.postWord(word);
                 this.changePlayerLetters(player);
                 //UpdateGui.setCurrentPlayer(player.playerNumber);
-                this.buildTableScore(player,word);
                 System.out.println(word);
             }
         });

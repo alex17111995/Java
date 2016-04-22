@@ -69,7 +69,7 @@ public class Player implements Runnable{
                boolean isValid=checkValidWordAndUpdateDataStructures(wordSubmitted);
                 //SHIT WORD
                 //TODO update
-                UpdateGui.update();
+                UpdateGui.update(this,isValid,wordSubmitted);
             } catch (InterruptedException e) {
                 break;//s-a terminaj jocul
             }
