@@ -2,6 +2,7 @@ package graphicInterface;
 
 import game.Game;
 import game.Player;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.*;
 
@@ -26,9 +27,9 @@ public class UpdateGui {
 
     private static Game game;
     public static void update(){
-        Task task = new Task<Void>() {
-            @Override public Void call() {
-
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
                 Player player = game.getPlayer();
                 List<Character> tiles= player.getTiles();
                 Button[] buttons= new Button[7];
@@ -45,11 +46,9 @@ public class UpdateGui {
                 for(int i=tiles.size();i<7;i++){
                     buttons[i].setText("");
                 }
-                return null;
+                return;
             }
-        };
-
-        new Thread(task).start();
+        });
     }
     public static void setUpdateGui(GuiController control){
         controller=control;

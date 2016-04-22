@@ -16,6 +16,10 @@ public class Bag {
         for(char letter='A';letter<='Z';letter++){
             for(int i=0;i<5;i++)
             availableTiles.add(letter);
+            if(letter=='A'||letter=='E'||letter=='I'||letter=='O'||letter=='U')
+                for(int i=0;i<15;i++)
+                    availableTiles.add(letter);
+
         }
     }
 

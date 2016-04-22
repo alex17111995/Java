@@ -21,7 +21,7 @@ public class Trie {
         }
         TrieNode childWithLetter(char letter){
             for (TrieNode child : children) {
-                if(child.getLetter()==letter)
+                if(Character.toUpperCase(child.getLetter())==Character.toUpperCase(letter))
                     return child;
             }
             return null;

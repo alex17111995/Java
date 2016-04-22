@@ -1,5 +1,6 @@
 package game;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +18,10 @@ public class Game {
         return wordsAccepted.isAcceptedWord(word);
     }
    public Game(){
-       List<String> testare = new ArrayList<>();
-       testare.add("Ciubi");
-       testare.add("Ciuc");
+      ParseFile file= new ParseFile();
+      List<String>cuvinte= file.getList(new File("words.txt"));
        bag=new Bag();
-       wordsAccepted= new AcceptedWords(new Trie(),testare);
+       wordsAccepted= new AcceptedWords(new Trie(),cuvinte);
     }
     public void generatePlayer(){
         Player player= new Player(playersOfGame.size(),this);

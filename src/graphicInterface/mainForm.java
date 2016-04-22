@@ -4,6 +4,7 @@ import com.sun.javaws.exceptions.InvalidArgumentException;
 import game.Game;
 import game.Player;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -60,7 +61,6 @@ public class mainForm extends Application {
 
         //initializing buttons before each turn
         // TODO: 4/22/2016
-
 
 
         for(int i=0;i<5;i++){//NUMBER of players
