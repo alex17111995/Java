@@ -23,7 +23,7 @@ public class Game {
         nextPlayer.notifyTurnSwitch();
         return nextPlayer;
     }
-    Player getPlayer(){
+   synchronized Player getPlayer(){
         return playersOfGame.get(currentPlayer);
 
     }
