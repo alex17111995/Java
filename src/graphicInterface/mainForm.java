@@ -15,11 +15,13 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Created by dryflo on 4/22/2016.
  */
-public class mainForm extends Application {
+public class MainForm extends Application {
     private GuiController controller = new GuiController();
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -48,8 +50,12 @@ public class mainForm extends Application {
     }
 
     protected void setImage(ImageView imageView)throws  InvalidArgumentException{
-        String filePath=System.getProperty("user.dir");
-        File file = new File(filePath,"rsz_images.png");
+
+        Path currentRelativePath = Paths.get("");
+        String filePath = currentRelativePath.toAbsolutePath().toString();
+        File file = new File(new File(filePath,"src").getAbsolutePath(),"graphicInterface");
+        file=new File(file.getAbsolutePath(),"rsz_images.png");
+
         if(!file.exists()){
             throw new InvalidArgumentException(new String[]{"invalid path"});
         }
