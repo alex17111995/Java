@@ -50,30 +50,40 @@ public class Player implements Runnable{
                 String wordSubmitted= getWord(); //apel blocant
                 //TODO update GUI using something like controller.update()..
 
-                if(gamePlayer.postWord(wordSubmitted)==true && checkHaveRequiringTiles(wordSubmitted)==true){
-                    synchronized (this) {
-                        List<Character> newTiles= gamePlayer.getTiles(wordSubmitted.length());
-                        if(newTiles.size()==0){
-                            //TODO no more tiles game is finished{
-                        }
-                        char[] formingCharcters= wordSubmitted.toCharArray();
-                        for (char formingCharcter : formingCharcters) {
-                            this.tiles.remove(new Character(formingCharcter));
-                        }
-                        for (Character newTile : newTiles) {
-                            this.tiles.add(newTile);
-                        }
-                        numberOfPoints += gamePlayer.computeWordValue(wordSubmitted);
-                    }
-                    gamePlayer.switchPlayer();//turn ended, switchPlayer
-                }
+               boolean isValid=checkValidWordAndUpdateDataStructures(wordSubmitted);
                 //SHIT WORD
+                //TODO update
                 UpdateGui.update();
             } catch (InterruptedException e) {
                 break;//s-a terminaj jocul
             }
         }
 
+    }
+    protected boolean checkValidWordAndUpdateDataStructures(String wordSubmitted){
+        if(gamePlayer.postWord(wordSubmitted)==true && checkHaveRequiringTiles(wordSubmitted)==true){
+            synchronized (this) {
+                List<Character> newTiles= gamePlayer.getTiles(wordSubmitted.length());
+                if(newTiles.size()==0){
+                    //TODO no more tiles game is finished{
+                }
+                char[] formingCharcters= wordSubmitted.toCharArray();
+                for (char formingCharcter : formingCharcters) {
+                    this.tiles.remove(new Character(formingCharcter));
+                }
+                for (Character newTile : newTiles) {
+                    this.tiles.add(newTile);
+                }
+                numberOfPoints += gamePlayer.computeWordValue(wordSubmitted);
+            }
+            gamePlayer.switchPlayer();//turn ended, switchPlayer
+            return  true;
+        }
+        return  false;
+
+    }
+    protected  void discardTilesIfStuck(){
+        return;
     }
     private boolean checkHaveRequiringTiles(String word){
 
