@@ -1,3 +1,6 @@
+import javafx.application.Platform;
+
+import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,19 +15,43 @@ public class Player implements Runnable{
         this.playerNumber=playerNumber;
         this.gamePlayer=game;
     }
+
+    public List<Character> getTiles() {
+        return tiles;
+    }
+
+    public void setTiles(List<Character> tiles) {
+        this.tiles = tiles;
+    }
+    private String postedWord="";
+    synchronized void postWord(String word){
+        postedWord=word;
+        this.notify();
+    }
+
+    synchronized String getWord() throws InterruptedException {
+        wait();
+        return  postedWord;
+    }
     List<Character> tiles= new ArrayList<>();
+
 
     @Override
     public void run() {
+        while(true){
+            try {
+                String wordSubmitted= getWord(); //apel blocant
+                //TODO update GUI using something like controller.update()..
+            } catch (InterruptedException e) {
+                break;//s-a terminaj jocul
+            }
+        }
 
     }
 
     List<Character> getTiles(int numberOfTilesToGet){
         return null;
     }
-    boolean postWord(String str){
-        //TODO
-        return false;
-    }
+
 
 }
