@@ -36,7 +36,9 @@ public class Player implements Runnable{
         return  postedWord;
     }
     List<Character> tiles= new ArrayList<>();
-
+    synchronized int getNumberOfPoints(){
+        return numberOfPoints;
+    }
 
     @Override
     public void run() {
@@ -44,6 +46,13 @@ public class Player implements Runnable{
             try {
                 String wordSubmitted= getWord(); //apel blocant
                 //TODO update GUI using something like controller.update()..
+                if(gamePlayer.postWord(wordSubmitted)==true){
+                    synchronized (this) {
+                        numberOfPoints += gamePlayer.computeWordValue(wordSubmitted);
+                    }
+                    gamePlayer.switchPlayer();//turn ended, switchPlayer
+                }
+                //SHIT WORD
                 UpdateGui.update();
             } catch (InterruptedException e) {
                 break;//s-a terminaj jocul
