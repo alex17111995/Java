@@ -3,6 +3,7 @@ package graphicInterface;
 import game.Game;
 import game.Player;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 
@@ -14,14 +15,14 @@ import java.util.List;
 public class UpdateGui {
     private static GuiController controller;
     private static int currentPlayer;
-    private static ObservableList<TableRow> data;
+    private static ObservableList<TableRow> data= FXCollections.observableArrayList();
+
     public static Game getGame() {
         return game;
     }
     public static void setTable(ObservableList<TableRow> table){
         data=table;
     }
-
     public static void setGame(Game game) {
         UpdateGui.game = game;
     }
@@ -56,6 +57,8 @@ public class UpdateGui {
                 for(int i=tiles.size();i<7;i++){
                     buttons[i].setText("");
                 }
+                controller.getCurrentPlayer().setText("Player "+player.getPlayerNumber());
+
                 if(isValid){
                     TableRow entry =new TableRow("player "+Integer.toString(playerUpdated.getPlayerNumber()),word,Integer.toString(word.length()),Integer.toString(playerUpdated.getPlayerPoints()));
                     data.add(entry);
@@ -65,6 +68,7 @@ public class UpdateGui {
             }
         });
     }
+
     public static void setUpdateGui(GuiController control){
         controller=control;
     }

@@ -12,10 +12,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -35,15 +39,51 @@ public class mainForm extends Application {
     private List<Button> myLetters=new ArrayList<>();
     private List<Button> letters=new ArrayList<>();
     private final ObservableList<TableRow> data= FXCollections.observableArrayList();
+    private  int numberOfPlayers;
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource(
-                        "wordGame.fxml"
-                )
-        );
-        loader.setController(controller);
-        Parent frame = loader.load();
+
+        Pane frame = new Pane();
+        Button button=new Button("generate players");
+        TextField playerNumberInput=new TextField();
+        Label label=new Label();
+        button.setOnAction(e->{
+            if(!this.checkPlayerNumberInput(playerNumberInput.getText())){
+                //do nothing --retry
+                label.setText("incorect number of plyers");
+
+            }else{
+                this.numberOfPlayers=Integer.parseInt(playerNumberInput.getText());
+                this.actualGameWindow(primaryStage);
+            }
+        });
+        button.setLayoutX(95);
+        button.setLayoutY(100);
+        playerNumberInput.setLayoutX(75);
+        playerNumberInput.setLayoutY(50);
+        label.setLayoutX(75);
+        label.setLayoutY(150);
+        frame.getChildren().add(button);
+        frame.getChildren().add(playerNumberInput);
+        frame.getChildren().add(label);
+        primaryStage.setScene(new Scene(frame, 300, 300));
+
+        primaryStage.show();
+    }
+    
+    protected void actualGameWindow(Stage primaryStage){
+        Parent frame=null;
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource(
+                            "wordGame.fxml"
+                    )
+            );
+            loader.setController(controller);
+             frame = loader.load();
+        }catch(IOException e){
+            System.out.println("file not found");
+        }
         UpdateGui.setUpdateGui(controller);
         UpdateGui.setGame(game);
         UpdateGui.setTable(data);
@@ -54,16 +94,14 @@ public class mainForm extends Application {
             System.out.println("image not found");
         }
 
-
         this.initializeTableScore();
-
-
         //adding gui buttons to list
         this.addButtons();
         Thread timerkeeper= new Thread(new Timekeeper());
         timerkeeper.setDaemon(true);
         timerkeeper.start();
-        for(int i=0;i<5;i++){//NUMBER of players
+
+        for(int i=0;i<this.numberOfPlayers;i++){//NUMBER of players
             this.game.generatePlayer(); //genereaza si incepe threadul
         }
         UpdateGui.setCurrentPlayer(game.getCurrentPlayer());
@@ -71,7 +109,6 @@ public class mainForm extends Application {
         this.myLettersAction();
         this.lettersAction();
         UpdateGui.update(game.getPlayer(),false,"");
-
 
         controller.getSubmitWord().setOnAction(e->{
             String word="";
@@ -92,13 +129,21 @@ public class mainForm extends Application {
         frame.setStyle("-fx-background-color: rgba(216, 243, 255, 0.72);");
         primaryStage.setTitle("Word Game");
         primaryStage.setScene(new Scene(frame, 688, 483));
-
-
-
-
-
-        primaryStage.show();
     }
+
+
+
+
+    protected Boolean checkPlayerNumberInput(String input){
+        if(!NumberUtils.isNumber(input)||input==null||input.isEmpty()){
+            return false;
+        }
+        if(Integer.parseInt(input)>10||Integer.parseInt(input)<1){
+            return false;
+        }
+        return true;
+    }
+
 
     protected void lettersAction(){
         for(Button letter:this.letters){
@@ -109,6 +154,8 @@ public class mainForm extends Application {
             });
         }
     }
+
+
     protected void myLettersAction(){
         for(Button letter:this.myLetters){
             letter.setOnAction(e->{
@@ -132,6 +179,7 @@ public class mainForm extends Application {
             this.myLetters.get(current).setText(player.getTiles().get(current).toString());
         }
     }
+
     protected void addButtons(){
         this.myLetters.add(controller.getMyLetter1());
         this.myLetters.add(controller.getMyLetter2());
@@ -183,6 +231,7 @@ public class mainForm extends Application {
         controller.getTotalColumn().setCellValueFactory(new PropertyValueFactory<TableRow,String>("Total"));
         controller.getScoreTable().setItems(data);
     }
+
     public static void main(String[] args) {
         launch(args);
     }

@@ -1,10 +1,7 @@
 package graphicInterface;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 /**
@@ -36,6 +33,34 @@ public class GuiController {
     @FXML private TableColumn<TableRow,String> wordColumn;
     @FXML private TableColumn<TableRow,String> scoreColumn;
     @FXML private TableColumn<TableRow,String> totalColumn;
+    @FXML private Button generatePlayers;
+    @FXML private TextField playerNumberInput;
+    @FXML private Label winOutput;
+
+
+    public Button getGeneratePlayers() {
+        return generatePlayers;
+    }
+
+    public void setGeneratePlayers(Button generatePlayers) {
+        this.generatePlayers = generatePlayers;
+    }
+
+    public TextField getPlayerNumberInput() {
+        return playerNumberInput;
+    }
+
+    public void setPlayerNumberInput(TextField playerNumberInput) {
+        this.playerNumberInput = playerNumberInput;
+    }
+
+    public Label getWinOutput() {
+        return winOutput;
+    }
+
+    public void setWinOutput(Label winOutput) {
+        this.winOutput = winOutput;
+    }
 
     public TableColumn<TableRow, String> getWordColumn() {
         return wordColumn;

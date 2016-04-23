@@ -55,10 +55,13 @@
     </HBox>
     <Label fx:id="timer" alignment="CENTER" layoutX="500.0" layoutY="30.0" prefWidth="65.0" text="tt" />
     <Label alignment="CENTER" layoutX="406.0" layoutY="30.0" prefWidth="69.0" text="Time" textAlignment="CENTER" />
-    <Button fx:id="submitWord" layoutX="320.0" layoutY="211.0" mnemonicParsing="false" text="Submit word" />
-    <Button layoutX="320.0" layoutY="242.0" mnemonicParsing="false" prefWidth="88.00009999999747" text="auto-fill" />
-    <Label alignment="CENTER" layoutX="391.0" layoutY="313.0" prefWidth="160.0" text="Points received" />
+    <Button fx:id="submitWord" layoutX="362.0" layoutY="212.0" mnemonicParsing="false" text="Submit word" />
+    <Button layoutX="523.0" layoutY="212.0" mnemonicParsing="false" prefWidth="106.0" text="end turn" />
+    <Label fx:id="winOutput" alignment="CENTER" layoutX="391.0" layoutY="313.0" prefWidth="160.0" text="" />
     <Label fx:id="player" alignment="CENTER" layoutX="500.0" layoutY="63.0" prefWidth="65.0" text="" />
     <Label alignment="CENTER" layoutX="406.0" layoutY="63.0" prefWidth="69.0" text="Turn" textAlignment="CENTER" />
+    <TextField fx:id="playerNumberInput" layoutX="362.0" layoutY="242.0" prefWidth="88.0" />
+    <Button fx:id="generatePlayers" layoutX="517.0" layoutY="242.0" mnemonicParsing="false" prefWidth="118.0" text="generate players" />
+    <Label layoutX="353.0" layoutY="264.0" prefWidth="106.0" text="Number of players" />
   </children>
 </AnchorPane>
