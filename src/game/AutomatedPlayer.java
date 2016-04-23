@@ -1,5 +1,7 @@
 package game;
 
+import graphicInterface.UpdateGui;
+
 /**
  * Created by Alex on 4/22/2016.
  */
@@ -30,9 +32,10 @@ public class AutomatedPlayer extends  Player {
                     discardTilesIfStuck();
                     //TODO UPDATE GUI
                 }
-                else this.checkValidWordAndUpdateDataStructures(foundString);
-                gamePlayer.switchPlayer();
-
+                else {
+                    this.checkValidWordAndUpdateDataStructures(foundString);
+                    UpdateGui.update(this, true, foundString);
+                }
 
             } catch (InterruptedException e) {
                 break;
