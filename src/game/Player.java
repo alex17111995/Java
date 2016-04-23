@@ -63,7 +63,11 @@ public class Player implements Runnable{
                     if(gameOver)
                         break;
                 }
-                String wordSubmitted= getWord(); //apel blocant
+                String wordSubmitted= getWord();
+                synchronized (this){
+                    if(gameOver)
+                        break;
+                }//apel blocant
                 //TODO update GUI using something like controller.update()..
 
                boolean isValid=checkValidWordAndUpdateDataStructures(wordSubmitted);

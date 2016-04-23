@@ -63,9 +63,10 @@ public class mainForm extends Application {
         Thread timerkeeper= new Thread(new Timekeeper());
         timerkeeper.setDaemon(true);
         timerkeeper.start();
-        for(int i=0;i<5;i++){//NUMBER of players
+        for(int i=0;i<1;i++){//NUMBER of players
             this.game.generatePlayer(); //genereaza si incepe threadul
         }
+        this.game.generateAutomatedPlayer();
         UpdateGui.setCurrentPlayer(game.getCurrentPlayer());
 
         this.myLettersAction();
@@ -128,9 +129,7 @@ public class mainForm extends Application {
         return false;
     }
     protected void changePlayerLetters(Player player){
-        for(int current=0;current<this.myLetters.size();current++){
-            this.myLetters.get(current).setText(player.getTiles().get(current).toString());
-        }
+
     }
     protected void addButtons(){
         this.myLetters.add(controller.getMyLetter1());

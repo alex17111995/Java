@@ -16,15 +16,24 @@ public class AutomatedPlayer extends  Player {
     }
 
     @Override
-    public void notifyTurnSwitch() {
+   synchronized public void notifyTurnSwitch() {
         this.notify();
     }
 
     @Override
     public void run() {
+        tiles=gamePlayer.getTiles(7); //initHand
         while(true){
             try {
-                this.wait();
+                synchronized (this){
+                if(gameOver)
+                    break;
+                    this.wait();
+
+                    if(gameOver)
+                        break;
+                }
+
                 Character[] tilesArray=new Character[7];
                 this.tiles.toArray(tilesArray);
                 String foundString=searchForWord("",tilesArray,0,this.tiles.size());
@@ -48,7 +57,7 @@ public class AutomatedPlayer extends  Player {
             return null;
         }
         for (int i=0;i<tiles.length;i++) {
-            if(tiles[i]!='\0') {
+            if(tiles[i]!=null &&tiles[i]!='\0') {
                 String appended = current + tiles[i];
                 boolean isValid=gamePlayer.postWord(appended);
                 if(isValid)

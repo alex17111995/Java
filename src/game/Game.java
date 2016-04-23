@@ -36,6 +36,12 @@ public class Game {
         playersOfGame.add(player);
         new Thread(player).start();
     }
+    public  void generateAutomatedPlayer(){
+        Player player= new AutomatedPlayer(playersOfGame.size(),this);
+        playersOfGame.add(player);
+        new Thread(player).start();
+
+    }
    public synchronized Player switchPlayer(){
 
         Player nextPlayer= playersOfGame.get(currentPlayer=(currentPlayer+1)%playersOfGame.size());
