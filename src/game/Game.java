@@ -17,12 +17,14 @@ public class Game {
    public boolean postWord(String word){
         return wordsAccepted.isAcceptedWord(word);
     }
-    void setGameOver(Player notifier){
+    public  void setGameOver(Player notifier){
         for (Player player : playersOfGame) {
             if(notifier==player)
                 continue;
             player.setGameOver();
-            player.notify();
+            synchronized (player) {
+                player.notify();
+            }
         }
     }
    public Game(){
